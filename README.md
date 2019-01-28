@@ -1,2 +1,0 @@
-# FlickrPhotos
-Created with CodeSandbox
