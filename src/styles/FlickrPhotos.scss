@@ -1,0 +1,35 @@
+@import 'vars';
+
+.fp-header {
+  height: 70px;
+  border-bottom: 1px solid $secondary-brand-lighter;
+  box-shadow: $box-shadow;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.fp-logo {
+  margin: 0;
+  font-weight: 500;
+  font-size: 22px;
+  color: $primary-text-light;
+  background-color: $secondary-brand-lighter;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+  box-shadow: $box-shadow;
+}
+
+.fp-body {
+  margin-top: 70px;
+  padding: 10px;
+}

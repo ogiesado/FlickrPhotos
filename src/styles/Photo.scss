@@ -1,0 +1,53 @@
+@import 'vars';
+
+.fp-photo {
+  width: 200px;
+
+  &__image {
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+
+  &__tag {
+    box-shadow: 0 2px 25px 0 rgba(34, 36, 38, 0.05) inset;
+    border: 1px solid $secondary-brand-light;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 12px;
+    margin: 0 5px 5px 0;
+    background-color: #fff;
+    outline: none;
+
+    &:focus {
+      border: 1px solid $primary-brand-light;
+    }
+  }
+
+  &__profile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__username {
+    font-weight: 600;
+    color: $primary-brand;
+  }
+
+  &__date {
+    color: $secondary-brand;
+    font-size: 12px;
+  }
+}

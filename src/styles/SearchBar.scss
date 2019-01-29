@@ -1,0 +1,21 @@
+@import 'vars';
+
+.fp-search-bar {
+  min-width: 500px;
+
+  &__input {
+    width: 100%;
+    margin-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid $secondary-brand-light;
+
+    &:focus {
+      border-color: $primary-brand-light;
+      border-width: 2px;
+    }
+  }
+}

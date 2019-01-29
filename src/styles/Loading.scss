@@ -1,0 +1,53 @@
+@import 'vars';
+
+.fp-loading {
+  overflow: hidden;
+  width: 50%;
+  height: 4px;
+  background-color: $primary-brand-lighter;
+  margin: 10px auto;
+
+  &__indicator {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      background-color: $primary-brand;
+      animation: first_inidcator 1.5s infinite ease-out;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      background-color: $primary-brand-light;
+      animation: second_inidcator 1.5s infinite ease-in;
+    }
+  }
+
+  @keyframes first_inidcator {
+    0% {
+      left: -100%;
+      width: 100%;
+    }
+    100% {
+      left: 100%;
+      width: 10%;
+    }
+  }
+
+  @keyframes second_inidcator {
+    0% {
+      left: -150%;
+      width: 100%;
+    }
+    100% {
+      left: 100%;
+      width: 10%;
+    }
+  }
+}
