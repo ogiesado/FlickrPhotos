@@ -31,7 +31,8 @@
     background-color: #fff;
     outline: none;
 
-    &:focus {
+    &:focus,
+    &:hover {
       border: 1px solid $primary-brand-light;
     }
   }

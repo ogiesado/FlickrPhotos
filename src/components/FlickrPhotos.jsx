@@ -2,10 +2,16 @@ import React, { Component, Fragment } from 'react';
 import SearchBar from './SearchBar';
 import Photos from './Photos';
 import Message from './Message';
+import { getPhotosForTag } from '../utils';
 
 import '../styles/FlickrPhotos.scss';
 
 export default class FlickrPhotos extends Component {
+  componentDidMount() {
+    console.log('did mount');
+    getPhotosForTag('cat');
+  }
+
   render() {
     return (
       <Fragment>

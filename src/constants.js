@@ -1,3 +1,9 @@
 export const ENTER_SEARCH_MESSAGE = 'Enter a tag to see photos!';
 export const NO_PHOTOS_MESSAGE = 'Sorry, your tag did not return any results.';
 export const SEARCHING_PHOTOS_MESSAGE = 'Searching photos for your tag...';
+export const FLICKR_API_KEY = 'a83a53cf20b3f968b6dcb9f9b8c36b65';
+export const FLICKR_API_URL = 'https://api.flickr.com/services/rest';
+export const FLICKR_PHOTO_URL = 'https://www.flickr.com/photos';
+export const FLICKR_API_STAT_SUCCESS = 'ok';
+export const FLICKR_API_STAT_ERROR = 'fail';
+export const PHOTOS_PER_PAGE = 20;
