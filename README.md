@@ -1,5 +1,7 @@
 # FlickrPhotos
 
+View photos on flickr.com by providing a photo tag
+
 ### How to run
 
 - Clone repository
