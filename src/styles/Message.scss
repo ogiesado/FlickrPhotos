@@ -3,6 +3,7 @@
 .fp-message {
   display: flex;
   flex-direction: column;
+  color: $primary-text-light;
   align-items: center;
   justify-content: center;
   min-height: 100px;
@@ -10,6 +11,7 @@
   box-shadow: 0 2px 25px 0 rgba(34, 36, 38, 0.05) inset;
   border: 1px solid $secondary-brand-light;
   border-radius: 3px;
+  margin-top: 100px;
   margin-bottom: 10px;
 
   @media screen and (min-width: 1000px) {

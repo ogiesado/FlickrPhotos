@@ -18,12 +18,17 @@ export function getPhotosForTag(tag, page = 1) {
     tags: tag,
     per_page: PHOTOS_PER_PAGE,
     media: 'photos',
-    extras: 'date_taken,owner_name,tags,url_m'
+    extras: 'date_taken,owner_name,tags,url_n,url_m'
   };
 
   return flickrApi('search', extraParams).then(
     ({ photos: { perpage, page, pages, photo: photos } } = {}) => {
-      return transformPhotos(photos);
+      return {
+        page,
+        hasPhotos: photos.length > 0,
+        hasMorePhotos: page < pages,
+        photos: transformPhotos(photos)
+      };
     }
   );
 }
@@ -84,14 +89,126 @@ function serailiazeParams(object) {
  */
 function transformPhotos(photos = []) {
   return photos.map(photo => {
+    const sizeSuffix = !isUndefined(photo.url_n) ? 'n' : 'm';
+
     return {
+      id: photo.id,
       title: photo.title,
       tags: photo.tags.split(' '),
-      url: `${FLICKR_PHOTO_URL}/${photo.owner}/${photo.id}`,
+      pageUrl: `${FLICKR_PHOTO_URL}/${photo.owner}/${photo.id}`,
+      photoUrl: photo[`url_${sizeSuffix}`],
       onwner: photo.ownername,
-      height: photo.height_m,
-      width: photo.width_m,
-      date: new Date(photo.datetaken).toLocaleDateString()
+      height: Number(photo[`height_${sizeSuffix}`]),
+      width: Number(photo[`width_${sizeSuffix}`]),
+      date: new Date(photo.datetaken).toLocaleDateString(),
+      backgroundColor: getRandomImagePlaceHolderColour()
     };
   });
+}
+
+/**
+ * Checks if a value is undefined
+ * @param {any} value
+ * @return {Boolean}
+ */
+export function isUndefined(value) {
+  return typeof value === 'undefined';
+}
+
+/**
+ * Checks if an string is empty
+ * @param {String} string
+ * @return {Boolean}
+ */
+export function isEmptyString(string) {
+  return string.length === 0;
+}
+
+/**
+ * A helper to debounce function calls
+ * @param {Function} fn The function to debounce
+ * @param {Number} waitTimeInSeconds The time in seconds to wait
+ * @return {Function} The debounced function
+ */
+export function debounce(fn, waitTimeInSeconds) {
+  let timeout = null;
+
+  waitTimeInSeconds = waitTimeInSeconds * 1000;
+
+  return function debounced(...args) {
+    const callback = () => {
+      fn(...args);
+      timeout = null;
+    };
+
+    if (timeout === null) {
+      timeout = setTimeout(callback, waitTimeInSeconds);
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(callback, waitTimeInSeconds);
+    }
+  };
+}
+
+/**
+ * Prevents the space character on keyboard event
+ * @param {Event}
+ * @return {void}
+ */
+export function preventSpaceKey(event) {
+  if (event.keyCode === 32) {
+    event.preventDefault();
+  }
+}
+
+/**
+ * Removes space characters from the clipboard text when apsting
+ * @param {Event}
+ * @return {void}
+ */
+export function removeSpacesFromClipboardText(event) {
+  event.preventDefault();
+
+  let clipboardText = (event.clipboardData || window.clipboardData).getData(
+    'text'
+  );
+
+  clipboardText = clipboardText.replace(/\s/gi, '');
+
+  const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    'value'
+  ).set;
+  nativeInputValueSetter.call(event.target, clipboardText);
+
+  event.target.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+/**
+ * A helper to get a random background colour for the photos
+ * @return {String}
+ */
+function getRandomImagePlaceHolderColour() {
+  const colours = [
+    '#9a6324',
+    '#ffd8b1',
+    '#fffac8',
+    '#008080',
+    '#808080',
+    '#46f0f0',
+    '#808000',
+    '#e6beff',
+    '#fffac8'
+  ];
+
+  return colours[getRandomInteger(colours.length)];
+}
+
+/**
+ * A helper to get a random postive integer
+ * @param {Number} max
+ * @return {Number}
+ */
+function getRandomInteger(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }

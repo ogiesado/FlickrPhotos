@@ -7,3 +7,4 @@ export const FLICKR_PHOTO_URL = 'https://www.flickr.com/photos';
 export const FLICKR_API_STAT_SUCCESS = 'ok';
 export const FLICKR_API_STAT_ERROR = 'fail';
 export const PHOTOS_PER_PAGE = 20;
+export const LAST_PHOTO_TOP_MARGIN = 300;
